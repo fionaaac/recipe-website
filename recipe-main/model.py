@@ -1,44 +1,45 @@
-class User:
-    def __init__(self, user_id, email, name):
-        self.user_id = user_id
-        self.email = email
-        self.name = name
+from . import db
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    name = db.Column(db.String(64), nullable=False)
+class Ingredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='ratings')
 
-class Recipe:
-    def __init__(self, recipe_id, title, description, user_id, persons, time, ingredients, q_ingredients, steps):
-        self.recipe_id = recipe_id
-        self.title = title
-        self.description = description
-        self.user_id = user_id
-        self.persons = persons
-        self.time = time
-        self.ingredients = ingredients
-        self.q_ingredients = q_ingredients
-        self.steps = steps
+class Q_Ingredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
+    ingredient = db.relationship('Ingredient', back_populates='ingredients')
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='q_ingredients')
+    quantity = db.Column(db.Integer)
+    units = db.Column(db.Integer)
+class Step(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(512), nullable=False)
+    recipe_id = db.Column(db.Integer, nullable=False)
+    recipe = db.relationship('Recipe', back_populates='steps')
+    position = db.Column(db.Enum)
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user = db.relationship('User', back_populates='recipes')
+    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
+    ingredient = db.relationship('Ingredient', back_populates='recipes')
+    step_id = db.Column(db.Integer, db.ForeignKey("step.id"), nullable=False)
+    step = db.relationship('Step', back_populates='recipes')
+    time = db.Column(db.Integer, nullable=False) # seconds
+    persons = db.Column(db.Integer, nullable=False)
 
-class Ingredient:
-    def __init__(self, ingredient_id, name):
-        self.ingredient_id = ingredient_id
-        self.name = name
-
-class Q_Ingredient:
-    def __init__(self, q_ingredient_id, ingredient_id, quantity, units, recipe_id):
-        self.q_ingredient_id = q_ingredient_id
-        self.ingredient_id = ingredient_id
-        self.quantity = quantity
-        self.units = units
-        self.recipe_id = recipe_id
-
-class Step:
-    def __init__(self, step_id, text, recipe_id, position):
-        self.step_id = step_id
-        self.text = text
-        self.recipe_id = recipe_id
-        self.position = position
-
-class Rating:
-    def __init__(self, rating_id, user_id, recipe_id, value):
-        self.rating_id = rating_id
-        self.user_id = user_id
-        self.recipe_id = recipe_id
-        self.value = value
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user = db.relationship('User', back_populates='ratings')
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='ratings')
