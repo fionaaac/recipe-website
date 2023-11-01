@@ -11,5 +11,5 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-    user = model.User(1, "mary@example.com", "mary")
-    return render_template("main/index.html", posts=posts)
+    user = model.User(id=1, email="mary@example.com", name="mary")
+    return render_template("main/index.html")
