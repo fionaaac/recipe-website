@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name of Website</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Name of Website</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.recipes') }}">Recipes</a></li>
+                <!-- <li><a href="#myaccount"></a></li> -->
+                {% if current_user.is_authenticated: %}
+                <li><a href="#addrecipe">Add Recipe</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Name of Website. All rights reserved.</p>
+    </footer>
