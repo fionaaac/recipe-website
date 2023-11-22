@@ -3,14 +3,19 @@ import dateutil.tz
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from . import db
+import flask_login
+
 from . import model
 
 bp = Blueprint("main", __name__)
 
 
 @bp.route("/")
+@flask_login.login_required
 def index():
-    user = model.User(id=1, email="mary@example.com", name="mary")
+    # user = model.User(1, "mary@example.com", "mary")
+    # return render_template("main/index.html", posts=posts)
+    # user = model.User(id=1, email="mary@example.com", name="mary")
     return render_template("main/index.html")
 
 @bp.route("/new-recipe")
