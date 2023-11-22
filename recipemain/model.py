@@ -5,7 +5,7 @@ class User(db.Model):
     # email = db.Column(db.String(128), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=False, nullable=False)
     name = db.Column(db.String(64), nullable=False)
-
+    password = db.Column(db.String(100), nullable=True)
     recipes = db.relationship('Recipe', back_populates='user')
     ratings = db.relationship('Rating', back_populates='user')
 

@@ -11,10 +11,10 @@
         <h1>Name of Website</h1>
         <nav>
             <ul>
-                <li><a href="{{ url_for('main.recipes') }}">Recipes</a></li>
+                <li><a href="#recipes">Recipes</a></li>
                 <!-- <li><a href="#myaccount"></a></li> -->
                 {% if current_user.is_authenticated: %}
-                <li><a href="#addrecipe">Add Recipe</a></li>
+                <li><a href="{{ url_for('main.new-recipes') }}">Add Recipe</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>
