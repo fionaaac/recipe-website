@@ -2,7 +2,8 @@ from . import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(128), unique=True, nullable=False)
+    # email = db.Column(db.String(128), unique=True, nullable=False)
+    email = db.Column(db.String(128), unique=False, nullable=False)
     name = db.Column(db.String(64), nullable=False)
 
     recipes = db.relationship('Recipe', back_populates='user')
