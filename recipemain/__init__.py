@@ -15,7 +15,7 @@ def create_app(test_config=None):
     # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://recipewebsite:hello@localhost/RecipeWebsite"
     
     # this one runs on sqlite which we can use until we figure out db
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///recipe-main.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///recipemain.db"
     
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
