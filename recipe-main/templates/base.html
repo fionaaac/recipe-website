@@ -12,8 +12,13 @@
         <nav>
             <ul>
                 <li><a href="#recipes">Recipes</a></li>
-                <li><a href="#myaccount">My Account</a></li>
+                <!-- <li><a href="#myaccount"></a></li> -->
+                {% if current_user.is_authenticated: %}
                 <li><a href="#addrecipe">Add Recipe</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
