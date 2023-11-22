@@ -4,6 +4,7 @@ import dateutil.tz
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from . import db
 import flask_login
+import uuid
 
 from . import model
 
@@ -28,17 +29,14 @@ def new_recipe_post():
     description = request.form.get("description")
     persons = request.form.get("persons")
     time = request.form.get("time")
-    # temp_user = model.User(id=12, email=flask_user, name="bonnie")
-    # temp_user = model.User()
     recipe = model.Recipe(
         user = flask_login.current_user,
-        id = 13,
-        # user = temp_user,
+        id = uuid.uuid4(),
         title = title,
         description = description,
         persons = persons,
         time = time,
-        ingredient_id = 13
+        ingredient_id = uuid.uuid4()
     )
 
     print(recipe)

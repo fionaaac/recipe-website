@@ -31,6 +31,12 @@ def signup_post():
     new_user = model.User(email=email, name=username, password=password_hash)
     db.session.add(new_user)
     db.session.commit()
+    print("all users after signup")
+    all_users = model.User.query.all()
+
+    # Display or iterate through the recipes
+    for user in all_users:
+        print(f"User ID: {user.id}, Name: {user.name}, Email: {user.email}")
     flash("You've successfully signed up! Please log in.")
     return redirect(url_for("auth.login"))
 
@@ -48,15 +54,15 @@ def login_post():
         # The user exists and the password is correct
         flask_login.login_user(user)
         flash("You've successfully logged in!")
+        print("all users after login: ")
         all_users = model.User.query.all()
 
         # Display or iterate through the recipes
         for user in all_users:
             print(f"User ID: {user.id}, Name: {user.name}, Email: {user.email}")
-        return redirect(url_for("main.new_recipe"))
+        return redirect(url_for("main.index"))
     else:
         flash("Invalid email or password")
-        print("invalid")
         return redirect(url_for("auth.login"))
     
 @bp.route("/logout")

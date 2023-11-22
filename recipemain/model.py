@@ -1,8 +1,9 @@
 from . import db
 from flask_login import UserMixin
+import uuid
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(36), default=str(uuid.uuid4()), primary_key=True)
     # email = db.Column(db.String(128), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=False, nullable=False)
     name = db.Column(db.String(64), nullable=False)
