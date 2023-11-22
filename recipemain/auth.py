@@ -48,9 +48,15 @@ def login_post():
         # The user exists and the password is correct
         flask_login.login_user(user)
         flash("You've successfully logged in!")
-        return redirect(url_for("main.index"))
+        all_users = model.User.query.all()
+
+        # Display or iterate through the recipes
+        for user in all_users:
+            print(f"User ID: {user.id}, Name: {user.name}, Email: {user.email}")
+        return redirect(url_for("main.new_recipe"))
     else:
         flash("Invalid email or password")
+        print("invalid")
         return redirect(url_for("auth.login"))
     
 @bp.route("/logout")

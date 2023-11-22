@@ -1,11 +1,12 @@
 from . import db
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     # email = db.Column(db.String(128), unique=True, nullable=False)
     email = db.Column(db.String(128), unique=False, nullable=False)
     name = db.Column(db.String(64), nullable=False)
-
+    password = db.Column(db.String(100), default='hi')
     recipes = db.relationship('Recipe', back_populates='user')
     ratings = db.relationship('Rating', back_populates='user')
 
@@ -57,3 +58,8 @@ class Rating(db.Model):
     user = db.relationship('User', back_populates='ratings')
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     recipe = db.relationship('Recipe', back_populates='ratings')
+
+from recipemain import db, create_app
+app=create_app()
+with app.app_context():
+    db.create_all()

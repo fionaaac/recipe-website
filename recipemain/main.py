@@ -28,21 +28,48 @@ def new_recipe_post():
     description = request.form.get("description")
     persons = request.form.get("persons")
     time = request.form.get("time")
-    temp_user = model.User(id=7, email="bonnie@example.com", name="bonnie")
+    # temp_user = model.User(id=12, email=flask_user, name="bonnie")
     # temp_user = model.User()
     recipe = model.Recipe(
-        # user = flask_login.current_user,
-        id = 5,
-        user = temp_user,
+        user = flask_login.current_user,
+        id = 13,
+        # user = temp_user,
         title = title,
         description = description,
         persons = persons,
         time = time,
-        ingredient_id = 5
+        ingredient_id = 13
     )
 
     print(recipe)
     db.session.add(recipe)
     db.session.commit()
+    all_recipes = model.Recipe.query.all()
 
+    # Display or iterate through the recipes
+    for recipe in all_recipes:
+        print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
     return redirect(url_for("main.index"))
+
+@bp.route("/user/<username>")
+@flask_login.login_required
+def user(username):
+    user = model.User(email="mary@example.com", name="mary")
+    posts = [
+        model.Message(
+            user=user,
+            text="Test post",
+            timestamp=datetime.datetime.now(dateutil.tz.tzlocal()),
+        ),
+        model.Message(
+            user=user,
+            text="Another post",
+            timestamp=datetime.datetime.now(dateutil.tz.tzlocal()),
+        ),
+        model.Message(
+            user=user,
+            text="third post to test grid",
+            timestamp=datetime.datetime.now(dateutil.tz.tzlocal()),
+        ),
+    ]
+    return render_template("main/user.html", user=user, posts=posts)

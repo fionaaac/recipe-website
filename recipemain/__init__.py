@@ -2,14 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 bcrypt = Bcrypt()
+db = SQLAlchemy()
 
 def create_app(test_config=None):
     app = Flask(__name__)
-
-# A secret for signing session cookies
+    # A secret for signing session cookies
     app.config["SECRET_KEY"] = "93220d9b340cf9a6c39bac99cce7daf220167498f91fa"
 
     # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqldb://recipewebsite:hello@localhost/RecipeWebsite"
@@ -17,6 +18,8 @@ def create_app(test_config=None):
     # this one runs on sqlite which we can use until we figure out db
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///recipemain.db"
     
+    migrate = Migrate(app, db)
+
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
