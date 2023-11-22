@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section>
-        <h2>Latest posts from the people you follow</h2>
+    <section id="recipes">
+        <h2>Current Recipes</h2>
+        {% include 'current_recipes.html' %}
+    </section>
+    <section id="popular-categories">
+        <h2>Popular Categories</h2>
+        {% include 'popular_categories.html' %}
+    </section>
+    <section id="all-recipes">
+        <h2>All Recipes</h2>
+        {% include 'all_recipes.html' %}
     </section>
 {% endblock %}
