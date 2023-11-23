@@ -66,8 +66,3 @@ class Rating(db.Model):
     # recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='ratings')
-
-# from recipemain import db, create_app
-# app=create_app()
-# with app.app_context():
-#     db.create_all()
