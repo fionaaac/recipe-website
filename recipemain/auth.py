@@ -3,6 +3,7 @@ from . import db, bcrypt
 
 from . import model
 import flask_login
+import uuid
 
 bp = Blueprint("auth", __name__)
 
