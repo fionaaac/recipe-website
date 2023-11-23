@@ -1,7 +1,7 @@
 # init_db.py
 
-from recipemain import create_app, db
+# from recipemain import create_app, db
 
-app = create_app() 
-with app.app_context():
-    db.create_all()
+# app = create_app() 
+# with app.app_context():
+#     db.create_all()
