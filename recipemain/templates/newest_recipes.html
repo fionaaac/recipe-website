@@ -1,9 +1,7 @@
-<div class="scrollable-container">
-  <div id="grid-container" class="side-by-side">
-      <div class="recipes grid">
-          {% for recipe in recipes %}
-              {% include 'recipe_template.html' %}
-          {% endfor %}
-      </div>
-  </div>
+<div class="container">
+    <ul class="cards">
+        {% for recipe in recipes %}
+            {% include 'recipe_template.html' %}
+        {% endfor %}
+    </ul>
 </div>

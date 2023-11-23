@@ -21,37 +21,37 @@ def index():
     description = "description"
     persons = "persons"
     time = "time"
-    recipes = [
-        model.Recipe(
-            user = flask_login.current_user,
-            id = uuid.uuid4().int >> (128 - 32),
-            title = title,
-            description = description,
-            persons = persons,
-            time = time,
-            ingredient_id = uuid.uuid4().int >> (128 - 32)
-        ),
-        model.Recipe(
-            user = flask_login.current_user,
-            id = uuid.uuid4().int >> (128 - 32),
-            title = title,
-            description = description,
-            persons = persons,
-            time = time,
-            ingredient_id = uuid.uuid4().int >> (128 - 32)
-        ),
-        model.Recipe(
-            user = flask_login.current_user,
-            id = uuid.uuid4().int >> (128 - 32),
-            title = title,
-            description = description,
-            persons = persons,
-            time = time,
-            ingredient_id = uuid.uuid4().int >> (128 - 32)
-        )
-    ]
+    # recipes = [
+    #     model.Recipe(
+    #         user = flask_login.current_user,
+    #         id = uuid.uuid4().int >> (128 - 32),
+    #         title = title,
+    #         description = description,
+    #         persons = persons,
+    #         time = time,
+    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
+    #     ),
+    #     model.Recipe(
+    #         user = flask_login.current_user,
+    #         id = uuid.uuid4().int >> (128 - 32),
+    #         title = title,
+    #         description = description,
+    #         persons = persons,
+    #         time = time,
+    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
+    #     ),
+    #     model.Recipe(
+    #         user = flask_login.current_user,
+    #         id = uuid.uuid4().int >> (128 - 32),
+    #         title = title,
+    #         description = description,
+    #         persons = persons,
+    #         time = time,
+    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
+    #     )
+    # ]
     
-    return render_template("main/index.html", recipes=recipes)
+    return render_template("main/index.html", recipes=model.Recipe.query.all())
 
 @bp.route("/new-recipe")
 def new_recipe():

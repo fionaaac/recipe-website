@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Popular Recipes</title>
-</head>
-<body>
-    
-</body>
-</html>
+<div class="container">
+    <ul class="cards">
+        {% for recipe in recipes %}
+            {% include 'recipe_template.html' %}
+        {% endfor %}
+    </ul>
+</div>
 
 
