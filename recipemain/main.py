@@ -15,7 +15,6 @@ bp = Blueprint("main", __name__)
 def index():
     # user = model.User(1, "mary@example.com", "mary")
     # return render_template("main/index.html", posts=posts)
-<<<<<<< HEAD
     # user = model.User(id=1, email="mary@example.com", name="mary", password="test")
     title = "title"
     description = "description"
@@ -51,12 +50,7 @@ def index():
     #     )
     # ]
     
-    return render_template("main/index.html", recipes=model.Recipe.query.all())
-=======
-    # user = model.User(id=1, email="mary@example.com", name="mary")
-    all_recipes = model.Recipe.query.all()
-    return render_template("main/index.html", recipes=all_recipes)
->>>>>>> main
+    return render_template("main/index.html", recipes=model.Recipe.query.all(), photos=model.Photo.query.all())
 
 @bp.route("/new-recipe")
 def new_recipe():

@@ -14,7 +14,7 @@
                                     {% set photo = recipe.photos[0] %}
                                     <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
                                 {% else %}
-                                    <img class="card-image" src="{{ url_for('static', filename='placeholder.jpg') }}" alt="placeholder">
+                                    <img class="card-image" src="{{ url_for('static', filename='placeholder.jpg') }}">
                                 {% endif %}
                                 <div class="card-footer">
                                     <p class="card-text">{{ recipe.description }}</p>
