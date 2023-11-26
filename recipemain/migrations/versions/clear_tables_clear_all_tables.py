@@ -2,7 +2,7 @@
 
 Revision ID: clear_tables
 Revises: 68db83f74914
-Create Date: 2023-11-23 13:13:12.396017
+Create Date: 2023-11-23 15:27:30.587065
 
 """
 from alembic import op

@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), default='hi')
     recipes = db.relationship('Recipe', back_populates='user')
     ratings = db.relationship('Rating', back_populates='user')
+    photos = db.relationship('Photo', back_populates='user')
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
@@ -56,6 +57,7 @@ class Recipe(db.Model):
     q_ingredients = db.relationship('Q_Ingredient', back_populates='recipe')
     steps = db.relationship('Step', back_populates='recipe')
     ratings = db.relationship('Rating', back_populates='recipe')
+    photos = db.relationship('Photo', back_populates='recipe')
 
 class Rating(db.Model):
     id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
@@ -66,3 +68,13 @@ class Rating(db.Model):
     # recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='ratings')
+
+class Photo(db.Model):
+    id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
+    
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='photos')
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
+    user = db.relationship('User', back_populates='photos')
+
+    file_extension = db.Column(db.String(8), nullable=False)

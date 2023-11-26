@@ -1,7 +1,7 @@
 <div id="recipe">
     <div class="card-row">
         <div class="card">
-            <img class="card-image" src="https://placeimg.com/640/480/nature">
+            <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
             <div class="card-footer">
                 <p class="card-text">{{ recipe.description }}</p>
                 <h3 class="card-title">{{ recipe.title }}</h3>
