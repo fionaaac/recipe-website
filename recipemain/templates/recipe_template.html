@@ -1,8 +1,22 @@
+<<<<<<< HEAD
 <li class="card">
     <div>
         <h3 class="card-title">{{ recipe.title }}</h3>
         <div class="card-content">
             <p>{{ recipe.description }}</p>
+=======
+<div id="recipe">
+    <div class="card-row">
+        <div class="card">
+            <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
+            <div class="card-footer">
+                <p class="card-text">{{ recipe.description }}</p>
+                <h3 class="card-title">{{ recipe.title }}</h3>
+                <p class="card-text">by 
+                    <span class="card-author">Author</span>
+                </p>
+            </div>
+>>>>>>> main
         </div>
     </div>
     <div class="card-link-wrapper">
