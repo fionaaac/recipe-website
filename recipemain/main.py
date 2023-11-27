@@ -2,6 +2,7 @@ import datetime
 import dateutil.tz
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask_login import current_user
 from . import db, model
 import flask_login
 
@@ -100,6 +101,7 @@ def new_recipe_post():
     uploaded_file.save(path)
 
     all_recipes = model.Recipe.query.all()
+
     # Prints all recipes in the database
     for recipe in all_recipes:
         print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
@@ -107,9 +109,11 @@ def new_recipe_post():
 
 @bp.route("/my-recipes")
 def my_recipes():
-    all_recipes = model.Recipe.query.all()
-    all_photos = model.Photo.query.all()
-    return render_template("my_recipes.html", recipes=all_recipes, photos=all_photos, zip=zip)
+    # all_recipes = model.Recipe.query.all()
+    # all_photos = model.Photo.query.all()
+    my_recipes = model.Recipe.query.filter_by(user_id=current_user.id).all()
+    my_photos = model.Photo.query.filter_by(user_id=current_user.id).all()
+    return render_template("my_recipes.html", recipes=my_recipes, photos=my_photos, zip=zip)
 
 @bp.route("/user/<username>")
 @flask_login.login_required
