@@ -11,8 +11,7 @@
         <h1>Name of Website</h1>
         <nav>
             <ul>
-                <li><a href="#recipes">Recipes</a></li>
-                <!-- <li><a href="#myaccount"></a></li> -->
+                <li><a href="{{ url_for('main.my_recipes') }}">My Recipes</a></li>
                 {% if current_user.is_authenticated: %}
                 <li><a href="{{ url_for('main.new_recipe') }}">Add Recipe</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>

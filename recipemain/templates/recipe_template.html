@@ -1,36 +1,10 @@
-<!-- <div id="recipe">
-    <div class="card-row">
-        {% for recipe in recipes %}
-            <div class="card">
-                {% if recipe.photos %}
-                    <h3>Found recipe</h3>
-                        {% set photo = recipe.photos[0] %}
-                        <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
-                    {% else %}
-                        <img class="card-image" src="{{ url_for('static', filename='placeholder.jpg') }}">
-                    {% endif %}
-                <div class="card-footer">
-                    <p class="card-text">{{ recipe.description }}</p>
-                    <h3 class="card-title">{{ recipe.title }}</h3>
-                    <p class="card-text">by 
-                        <span class="card-author">Author</span>
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="card-link-wrapper">
-        <a href="" class="card-link">Learn More</a>
-    </div>
-</li> -->
-
 <li class="card">
     <div>
         <h3 class="card-title">{{ recipe.title }}</h3>
         <div class="card-content">
             {% if recipe.photos %}
             {% set photo = recipe.photos[0] %}
-            <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
+            <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" width="300" height="200">
             {% endif %}
             <p>{{ recipe.description }}</p>
         </div>

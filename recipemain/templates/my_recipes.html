@@ -2,33 +2,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="scrollable-container">
-        <div id="grid-container" class="side-by-side">
-            <div class="recipes grid">
-                {% for recipe in recipes %}
-                    <div id="recipe">
-                        <div class="card-row">
-                            <div class="card">
-                                {% if recipe.photos %}
-                                    <h3>Found recipe</h3>
-                                    {% set photo = recipe.photos[0] %}
-                                    <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}">
-                                {% else %}
-                                    <img class="card-image" src="{{ url_for('static', filename='placeholder.jpg') }}">
-                                {% endif %}
-                                <div class="card-footer">
-                                    <p class="card-text">{{ recipe.description }}</p>
-                                    <h3 class="card-title">{{ recipe.title }}</h3>
-                                    <p class="card-text">by 
-                                        <span class="card-author">Author</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
     {% extends 'base.html' %}
+    {% block content %}
+    <div class="container">
+        <ul class="cards">
+            {% for recipe in recipes %}
+                {% include 'recipe_template.html' %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}
 </body>
