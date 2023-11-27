@@ -54,7 +54,7 @@ def index():
 
 @bp.route("/new-recipe")
 def new_recipe():
-    return render_template("main/new-recipe.html")
+    return render_template("main/new_recipe.html")
 
 @bp.route("/new-recipe", methods=["POST"])
 def new_recipe_post():
@@ -133,3 +133,5 @@ def user(username):
         ),
     ]
     return render_template("main/user.html", user=user, posts=posts)
+
+
