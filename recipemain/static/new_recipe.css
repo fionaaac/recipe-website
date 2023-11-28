@@ -1,8 +1,6 @@
 body {
     height: 100%;
-    background-color: #152733;
     overflow: hidden;
-    color: white;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -89,4 +87,8 @@ body {
     outline: none !important;
     border: none !important;
      box-shadow: none;
+}
+
+#index-body {
+    background-color: grey !important;
 }

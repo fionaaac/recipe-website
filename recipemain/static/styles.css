@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
+    background-color: #F6F6F5;
 }
 
 main {
@@ -16,10 +17,12 @@ footer {
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: #E7E5E0;
+    color: #52637A;
     padding: 1rem;
     text-align: center;
+    border: 10px !important;
+    border-color: #52637A !important;
 }
 
 nav ul {
@@ -30,7 +33,7 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: #52637A;
     text-decoration: none;
 }
 
@@ -70,7 +73,7 @@ article p {
 
 #newsletter button {
     background-color: #333;
-    color: white;
+    color: #52637A;
     padding: 0.5rem 1rem;
     cursor: pointer;
 }
@@ -81,20 +84,19 @@ article p {
 
 footer {
     background-color: #333;
-    color: white;
+    color: #52637A;
     padding: 1rem;
     text-align: center;
 }
 
 /* card UI */
   
-
 :root {
     --red: #ef233c;
     --darkred: #c00424;
     --platinum: #e5e5e5;
     --black: #2b2d42;
-    --white: #fff;
+    --white: #52637A;
     --thumb: #edf2f4;
   }
   
@@ -154,7 +156,7 @@ footer {
   .card .card-link {
     display: inline-block;
     text-decoration: none;
-    color: white;
+    color: #52637A;
     background: var(--red);
     padding: 6px 12px;
     border-radius: 8px;
@@ -211,3 +213,12 @@ footer {
       margin-right: 40px;
     }
   }
+  
+
+
+#index-body {
+  background-color: #E7E5E0;
+  padding: 2%;
+  margin-top: 2%;
+  border-radius: 3%;
+}
