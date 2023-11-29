@@ -109,7 +109,23 @@ def new_recipe_post():
 def my_recipes():
     all_recipes = model.Recipe.query.all()
     all_photos = model.Photo.query.all()
+    for recipe in model.Recipe.query.all():
+        print(recipe.id)
     return render_template("my_recipes.html", recipes=all_recipes, photos=all_photos, zip=zip)
+
+
+@bp.route('/recipe/<string:recipe_id>')
+@flask_login.login_required
+def recipe(recipe_id):
+    print('recipe_id', recipe_id)
+    for recipe in model.Recipe.query.all():
+        print(recipe.id)
+    recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
+    if recipe:
+        # Here, 'recipe' holds the recipe object fetched from the database
+        return render_template("main/recipe_info.html", recipe=recipe)
+    else:
+        abort(400, f"Recipe with id {recipe_id} not found")
 
 @bp.route("/user/<username>")
 @flask_login.login_required

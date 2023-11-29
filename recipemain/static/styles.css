@@ -57,6 +57,18 @@ article p {
     margin-top: 0.5rem;
 }
 
+main {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
 #newsletter {
     padding: 2rem;
     text-align: center;
@@ -101,9 +113,7 @@ footer {
   }
   
   .container {
-    max-width: 1400px;
-    padding: 0 15px;
-    margin: 0 auto;
+    width: 100%;
   }
   
   h2 {
@@ -221,4 +231,74 @@ footer {
   padding: 2%;
   margin-top: 2%;
   border-radius: 3%;
+}
+
+/* recipe info page styles */
+
+/* @media only screen and (min-width: 600px) {
+    .recipe-header {
+        display: grid;
+        grid-template-columns: 1fr 250px;
+        grid-template-areas: 'left right';
+        column-gap: var(--wp--custom--layout--padding);
+    }
+}
+
+@media only screen and (min-width: 600px) {}
+.recipe-header-left {
+    grid-area: left;
+}
+
+@media only screen and (min-width: 600px) {}
+.recipe-header-right {
+    grid-area: right;
+} */
+
+/* @media (min-width: 768px) {
+  .recipe-header {
+    grid-template-rows: auto 1fr;
+  }
+} */
+
+/* .recipe-header {
+  background: #52637A;
+  border: 2px solid #52637A;
+  padding: 40px;
+  font-size: 1rem;
+  border-radius: 24px;
+} */
+
+/* .recipe-container {
+  width: 100vw;
+} */
+
+/* .recipe-content {
+  padding: 40px;
+} */
+
+.comments-container {
+  margin: 60px 0px;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 400px; /* Set the height as desired */
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Style the left half */
+.left-half {
+  flex: 1;
+  background-color: lightblue;
+  padding: 20px;
+}
+
+/* Style the right half */
+.right-half {
+  flex: 1;
+  background-color: lightgreen;
+  padding: 20px;
 }

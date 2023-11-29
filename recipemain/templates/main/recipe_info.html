@@ -1,0 +1,21 @@
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <!-- <div class="recipe-container"> -->
+        <!-- <div class="recipe-content"> -->
+            <div class="container">
+                <div class="left-half">
+                    <h2>Left Half</h2>
+                    <p>This is the content of the left half of the container.</p>
+                </div>
+                <div class="right-half">
+                    <h2>Right Half</h2>
+                    <p>This is the content of the right half of the container.</p>
+                    <img src="{{ url_for('static', filename='../static/photos/photo-' ~ recipe.photos[0].id ~ '.jpg') }}" height="500">
+                </div>
+            </div>
+        <!-- </div> -->
+    <!-- </div> -->
+    {% endblock %}
+</body>
