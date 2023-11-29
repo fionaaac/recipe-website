@@ -64,6 +64,8 @@ def new_recipe_post():
     description = request.form.get("description")
     persons = request.form.get("persons")
     time = request.form.get("time")
+    ingredient_names = request.form.getlist("ingredients")
+    print(ingredient_names)
 
     recipe = model.Recipe(
         user = flask_login.current_user,
@@ -72,6 +74,11 @@ def new_recipe_post():
         persons = persons,
         time = time, 
     )
+
+    ingredients = model.Ingredient.query.filter(model.Ingredient.name.in_(ingredient_names)).all()
+    recipe.ingredients = ingredients
+
+    print(recipe.ingredients)
 
     uploaded_file = request.files['photo']
     if uploaded_file.filename != '':
