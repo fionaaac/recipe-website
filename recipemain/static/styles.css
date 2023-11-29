@@ -98,6 +98,11 @@ footer {
     --black: #2b2d42;
     --white: #52637A;
     --thumb: #edf2f4;
+    --base-beige: #ebeae3;
+    --base-white: #f8f7f4;
+    --accent-dark-green: #38524f;
+    --accent-light-green: #d8e1cc;
+    --accent-sage-green: #38514f;
   }
   
   .container {
