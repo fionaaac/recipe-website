@@ -110,10 +110,16 @@ footer {
     --black: #2b2d42;
     --white: #52637A;
     --thumb: #edf2f4;
+    --base-beige: #ebeae3;
+    --base-white: #f8f7f4;
+    --accent-dark-green: #38524f;
+    --accent-light-green: #d8e1cc;
+    --accent-sage-green: #38514f;
   }
   
   .container {
     width: 100%;
+    overflow: hidden; /* Prevents horizontal overflow */
   }
   
   h2 {
@@ -235,70 +241,233 @@ footer {
 
 /* recipe info page styles */
 
-/* @media only screen and (min-width: 600px) {
-    .recipe-header {
-        display: grid;
-        grid-template-columns: 1fr 250px;
-        grid-template-areas: 'left right';
-        column-gap: var(--wp--custom--layout--padding);
-    }
+
+.recipe-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
-
-@media only screen and (min-width: 600px) {}
-.recipe-header-left {
-    grid-area: left;
-}
-
-@media only screen and (min-width: 600px) {}
-.recipe-header-right {
-    grid-area: right;
-} */
-
-/* @media (min-width: 768px) {
-  .recipe-header {
-    grid-template-rows: auto 1fr;
-  }
-} */
-
-/* .recipe-header {
-  background: #52637A;
-  border: 2px solid #52637A;
-  padding: 40px;
-  font-size: 1rem;
-  border-radius: 24px;
-} */
-
-/* .recipe-container {
-  width: 100vw;
-} */
-
-/* .recipe-content {
-  padding: 40px;
-} */
 
 .comments-container {
   margin: 60px 0px;
 }
 
-.container {
+.recipe-header {
   display: flex;
   width: 100vw;
-  height: 400px; /* Set the height as desired */
+  height: 700px; /* Set the height as desired */
   margin: 0;
   padding: 0;
   justify-content: center;
+  border: 1px solid var(--accent-sage-green); 
 }
 
 /* Style the left half */
 .left-half {
   flex: 1;
-  background-color: lightblue;
   padding: 20px;
+  justify-content: center;
 }
 
-/* Style the right half */
 .right-half {
   flex: 1;
-  background-color: lightgreen;
-  padding: 20px;
+  padding: 0px;
 }
+
+.info-page-img {
+  width: 100%; /* Ensures image takes up entire width of the container */
+  height: 100%; /* Ensures image takes up entire height of the container */
+  object-fit: cover; /* Crops the image to fill its container */
+}
+
+.left-half-content {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  height: 100%; /* Occupy full height */
+}
+
+/* Style for the button */
+.save-button {
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-size: 16px; /* Adjust font size */
+  background-color: var(--accent-sage-green); /* Green background color */
+  color: var(--base-white); /* White text color */
+  border: none; /* No border */
+  cursor: pointer; /* Show pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Hover effect */
+.save-button:hover {
+  background-color: var(--accent-light-green); /* Darker green on hover */
+  color: var(--base-white); /* White text color */
+}
+
+.recipe-content {
+  margin-top: 100px;
+  justify-content: center;
+  width: 70%;
+  border: 2px solid var(--base-beige);
+  border-radius: 20px;
+}
+
+.recipe-content-header {
+  background: var(--accent-sage-green);
+  color: var(--base-beige);
+  border-radius: 20px;
+  position: relative;
+  margin: 0 0;
+  padding: 25px 25px;
+  text-align: left;
+}
+
+.recipe-content-heading {
+  margin-bottom: 15px;
+}
+
+.recipe-content-title {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: inherit;
+  margin: 0 0 10px;
+}
+
+.recipe-content-details {
+  margin-bottom: 15px;
+  clear: both;
+}
+
+.detail-items {
+  /* font-size: 0; */
+  border-left: 1px dashed rgba(0,0,0,.1);
+  border-top: 1px dashed rgba(0,0,0,.1);
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail-items .detail-item {
+  flex: 1 0 25%;
+  padding: 10px 1.5%;
+  position: relative;
+  box-sizing: border-box;
+  border-right: 1px dashed rgba(0,0,0,.1);
+  border-bottom: 1px dashed rgba(0,0,0,.1);
+  text-align: center;
+}
+
+.detail-item-label {
+  display: block;
+}
+
+.detail-item-value,
+.detail-item-units {
+  display: inline-block;
+  line-height: 5;
+}
+
+.recipe-content-ingredients {
+  background: var(--base-beige);
+  color: var(--accent-sage-green);
+  position: relative;
+  margin: 20px 20px;
+  padding: 25px 25px;
+  text-align: left;
+}
+
+.ingredients-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent-sage-green);
+  margin: 0 0 20px;
+  padding: 0;
+  background-color: transparent;
+}
+
+.ingredients-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients-list .ingredient-item {
+  border-color: #c5cfb4;
+  list-style: none;
+  padding: 0 0 13px;
+  margin: 0 0 13px;
+  border-bottom: 1px dashed var(--accent-sage-green);
+  position: relative;
+  line-height: 1.7;
+}
+
+.recipe-content-instructions {
+  background: var(--base-white);
+  color: var(--accent-sage-green);
+  border-radius: 0px;
+  position: relative;
+  margin: 0 0 30px;
+  padding: 25px 25px 5px;
+  text-align: left;
+}
+
+.instructions-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent-sage-green);
+  margin: 0 0 20px;
+  padding: 0;
+  background-color: transparent;
+}
+
+
+.instructions-list {
+  counter-reset: li;
+  /* margin: 0;
+  padding: 0; */
+}
+
+.instructions-list>li {
+  position: relative;
+  margin-top: 10px;
+  list-style-position: outside;
+  font-size: 1em;
+  margin: 0 0 0 32px;
+  padding: 0;
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+ ul.instructions-list li::before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -32px;
+  width: 24px;
+  height: 24px;
+  background: var(--wp--preset--color--senary);
+  border-radius: 50%;
+  color: var(--wp--preset--color--foreground);
+  font-size: var(--wp--preset--font-size--tiny);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.instructions-text>span {
+  font-size: 1em;
+  display: block;
+}
+
+.instructions-item {
+  display: flex;
+  align-items: center; /* Vertically align items */
+}
+
+/* .instructions-text {
+  font-size: 1em;
+} */
