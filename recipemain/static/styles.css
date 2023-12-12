@@ -1,3 +1,18 @@
+:root {
+  --red: #ef233c;
+  --darkred: #c00424;
+  --platinum: #e5e5e5;
+  --black: #2b2d42;
+  --white: #52637A;
+  --thumb: #edf2f4;
+  --base-beige: #ebeae3;
+  --base-white: #f8f7f4;
+  --base-dark: #232628;
+  --accent-dark-green: #38524f;
+  --accent-light-green: #d8e1cc;
+  --accent-sage-green: #38514f;
+}
+
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
@@ -5,7 +20,7 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: #F6F6F5;
+    background-color: var(--base-white);
 }
 
 main {
@@ -17,8 +32,8 @@ footer {
 }
 
 header {
-    background-color: #E7E5E0;
-    color: #52637A;
+    background-color: var(--base-beige);
+    color: var(--accent-dark-green);
     padding: 1rem;
     text-align: center;
     border: 10px !important;
@@ -33,7 +48,7 @@ nav ul {
 }
 
 nav a {
-    color: #52637A;
+    color: var(--accent-dark-green);
     text-decoration: none;
 }
 
@@ -90,20 +105,6 @@ footer {
 }
 
 /* card UI */
-  
-:root {
-    --red: #ef233c;
-    --darkred: #c00424;
-    --platinum: #e5e5e5;
-    --black: #2b2d42;
-    --white: #52637A;
-    --thumb: #edf2f4;
-    --base-beige: #ebeae3;
-    --base-white: #f8f7f4;
-    --accent-dark-green: #38524f;
-    --accent-light-green: #d8e1cc;
-    --accent-sage-green: #38514f;
-  }
   
   .container {
     max-width: 1400px;
