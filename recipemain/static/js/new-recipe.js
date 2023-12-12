@@ -6,5 +6,20 @@ $(document).ready(function () {
         closeOnSelect: false,
         tags: true
     } );
-    console.log("hello");
+
+    
 });
+
+function addIngredientRow() {
+    // Clone the existing row
+    var newRow = document.querySelector('.ingredient-row').cloneNode(true);
+
+    // Clear the input values in the cloned row
+    var inputs = newRow.querySelectorAll('input, select');
+    inputs.forEach(function (input) {
+        input.value = '';
+    });
+
+    // Append the new row to the form
+    document.getElementById('ingredient-form').appendChild(newRow);
+}

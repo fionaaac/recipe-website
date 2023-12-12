@@ -78,8 +78,6 @@ def new_recipe_post():
     ingredients = model.Ingredient.query.filter(model.Ingredient.name.in_(ingredient_names)).all()
     recipe.ingredients = ingredients
 
-    print(recipe.ingredients)
-
     uploaded_file = request.files['photo']
     if uploaded_file.filename != '':
         content_type = uploaded_file.content_type
