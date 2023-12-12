@@ -10,6 +10,7 @@
         </div>
     </div>
     <div class="card-link-wrapper">
-        <a href="" class="card-link">Learn More</a>
+        <!-- recipe_id_str = str(recipe) -->
+        <a href="{{ url_for('main.recipe', recipe_id=recipe.id|string) }}" class="card-link">Learn More</a>
     </div>
 </li>
