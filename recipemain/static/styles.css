@@ -114,6 +114,7 @@ footer {
     --base-white: #f8f7f4;
     --accent-dark-green: #38524f;
     --accent-light-green: #d8e1cc;
+    --accent-muted-light-green: #d8e1cc54;
     --accent-sage-green: #38514f;
   }
   
@@ -339,15 +340,16 @@ footer {
 .recipe-content-details {
   margin-bottom: 15px;
   clear: both;
+  display: flex;
+  flex-direction: column;
 }
 
 .detail-items {
   /* font-size: 0; */
-  border-left: 1px dashed rgba(0,0,0,.1);
-  border-top: 1px dashed rgba(0,0,0,.1);
   text-align: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  /* flex-wrap: wrap; */
 }
 
 .detail-items .detail-item {
@@ -355,9 +357,13 @@ footer {
   padding: 10px 1.5%;
   position: relative;
   box-sizing: border-box;
-  border-right: 1px dashed rgba(0,0,0,.1);
-  border-bottom: 1px dashed rgba(0,0,0,.1);
+  border-right: 1px dashed var(--accent-muted-light-green);
+  border-bottom: 1px dashed var(--accent-muted-light-green);
+  border-left: 1px dashed var(--accent-muted-light-green);
+  border-top: 1px dashed var(--accent-muted-light-green);
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .detail-item-label {
@@ -367,7 +373,7 @@ footer {
 .detail-item-value,
 .detail-item-units {
   display: inline-block;
-  line-height: 5;
+  line-height: 2;
 }
 
 .recipe-content-ingredients {

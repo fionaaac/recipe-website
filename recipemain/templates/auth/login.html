@@ -6,6 +6,7 @@
 {% endwith %}
 {% block content %}
     <h2>Login</h2>
+    <div></div>
     <form action="{{ url_for('auth.login_post') }}" method="post">
         <div><label>Email: <input type="email" name="email" required/></label></div>
         <div><label>Password: <input type="password" name="password" required/></label></div>
