@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: #F6F6F5;
+    background-color: --base-beige;;
 }
 
 main {
