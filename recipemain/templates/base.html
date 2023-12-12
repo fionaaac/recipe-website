@@ -14,6 +14,7 @@
                 <li><a href="{{ url_for('main.my_recipes') }}">My Recipes</a></li>
                 {% if current_user.is_authenticated: %}
                 <li><a href="{{ url_for('main.new_recipe') }}">Add Recipe</a></li>
+                <li><a href="{{ url_for('main.saved_recipes') }}">Saved Recipes</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>

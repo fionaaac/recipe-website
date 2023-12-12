@@ -1,0 +1,18 @@
+<div class="saved-card">
+    <div class="delete-wrapper">
+        <form action="{{ url_for('main.saved_recipe_delete', recipe_id=recipe.id) }}" method="POST" >
+            <button class="delete-button" type="submit" name="delete"><span></span>x</button> 
+        </form>
+    </div>
+    <div class="saved-card-image-container">
+        {% if recipe.photos %}
+        {% set photo = recipe.photos[0] %}
+        <img class="card-image" src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" width="300" height="200">
+        {% endif %}
+    </div>
+    <div class="saved-card-content">
+      <h3 class="saved-card-title">
+        {{ recipe.title }}
+      </h3>
+    </div>
+</div>

@@ -13,43 +13,6 @@ bp = Blueprint("main", __name__)
 @bp.route("/")
 @flask_login.login_required
 def index():
-    # user = model.User(1, "mary@example.com", "mary")
-    # return render_template("main/index.html", posts=posts)
-    # user = model.User(id=1, email="mary@example.com", name="mary", password="test")
-    title = "title"
-    description = "description"
-    persons = "persons"
-    time = "time"
-    # recipes = [
-    #     model.Recipe(
-    #         user = flask_login.current_user,
-    #         id = uuid.uuid4().int >> (128 - 32),
-    #         title = title,
-    #         description = description,
-    #         persons = persons,
-    #         time = time,
-    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
-    #     ),
-    #     model.Recipe(
-    #         user = flask_login.current_user,
-    #         id = uuid.uuid4().int >> (128 - 32),
-    #         title = title,
-    #         description = description,
-    #         persons = persons,
-    #         time = time,
-    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
-    #     ),
-    #     model.Recipe(
-    #         user = flask_login.current_user,
-    #         id = uuid.uuid4().int >> (128 - 32),
-    #         title = title,
-    #         description = description,
-    #         persons = persons,
-    #         time = time,
-    #         ingredient_id = uuid.uuid4().int >> (128 - 32)
-    #     )
-    # ]
-    
     return render_template("main/index.html", recipes=model.Recipe.query.all(), photos=model.Photo.query.all())
 
 @bp.route("/new-recipe")
@@ -106,6 +69,9 @@ def new_recipe_post():
         print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
     return redirect(url_for("main.my_recipes"))
 
+
+
+
 @bp.route("/my-recipes")
 def my_recipes():
     all_recipes = model.Recipe.query.all()
@@ -152,3 +118,41 @@ def user(username):
     return render_template("main/user.html", user=user, posts=posts)
 
 
+@bp.route("/saved-recipes")
+@flask_login.login_required
+def saved_recipes():
+
+    saved_recipes = model.Recipe.query.filter(model.Recipe.is_saved == True).all()
+    # for recipe in saved_recipes:
+    #     print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
+    return render_template("main/saved_recipes.html", recipes=saved_recipes)
+
+@bp.route('/recipe/<string:recipe_id>', methods=["POST"])
+@flask_login.login_required
+def save_recipe_post(recipe_id):
+
+    if recipe_id is not None:
+        recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
+        if recipe:
+            recipe.is_saved = True
+            db.session.commit()
+            print('switched flag!!')
+        else:
+            abort(400, f"Recipe with id {recipe_id} not found")
+    
+    return render_template("main/recipe_info.html", recipe=recipe)
+
+@flask_login.login_required
+@bp.route('/saved-recipes/<string:recipe_id>', methods=["POST"])
+def saved_recipe_delete(recipe_id):
+    if recipe_id is not None:
+        recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
+        if recipe:
+            recipe.is_saved = False
+            db.session.commit()
+            print('switched flag!!')
+        else:
+            abort(400, f"Recipe with id {recipe_id} not found")
+    
+    saved_recipes = model.Recipe.query.filter(model.Recipe.is_saved == True).all()
+    return render_template("main/saved_recipes.html", recipes=saved_recipes)
