@@ -9,7 +9,7 @@
                         <h1>{{ recipe.title }}</h1>
                         <p>By {{recipe.user.name}}</p>
                         <form action="{{ url_for('main.save_recipe_post', recipe_id=recipe.id) }}" method="POST" >
-                            <button class="save-button" type="submit" name="save" value="{{  recipe.id  }}"><span></span>Save Recipe</button> 
+                            <button class="save-button" type="submit" name="save"><span></span>Save Recipe</button> 
                         </form>
                         <!-- <input type="submit" name="save" value="Save Recipe" class="save-button"> -->
                     </div>
