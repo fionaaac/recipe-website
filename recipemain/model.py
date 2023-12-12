@@ -46,6 +46,7 @@ class Recipe(db.Model):
     description = db.Column(db.Text, nullable=False)
     time = db.Column(db.Integer, nullable=False) # seconds
     persons = db.Column(db.Integer, nullable=False)
+    is_saved = db.Column(db.Boolean, default=False)
 
     # user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)

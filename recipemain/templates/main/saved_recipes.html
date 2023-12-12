@@ -1,0 +1,13 @@
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="saved-recipes-container">
+        <h1>My Saved Recipes</h1>
+        {% for recipe in recipes %}
+            <h1>{{ recipe.id }}</h1>
+            {% include 'recipe_template.html' %}
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>

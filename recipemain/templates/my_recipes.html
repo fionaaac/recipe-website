@@ -4,13 +4,15 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-    <h1>Most Recent</h1>
-    <div class="container">
-        <ul class="cards">
-            {% for recipe in recipes %}
-                {% include 'recipe_template.html' %}
-            {% endfor %}
-        </ul>
+    <div class="home-container">
+        <h1>Most Recent</h1>
+        <div class="container">
+            <ul class="cards">
+                {% for recipe in recipes %}
+                    {% include 'recipe_template.html' %}
+                {% endfor %}
+            </ul>
+        </div>   
     </div>
     {% endblock %}
 </body>
