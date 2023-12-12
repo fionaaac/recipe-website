@@ -17,12 +17,12 @@ footer {
 }
 
 header {
-    background-color: #E7E5E0;
-    color: #52637A;
+    background-color: var(--base-beige);
+    color: var(--accent-dark-green);
     padding: 1rem;
     text-align: center;
     border: 10px !important;
-    border-color: #52637A !important;
+    border-color: var(--accent-sage-green) !important;
 }
 
 nav ul {
@@ -33,12 +33,12 @@ nav ul {
 }
 
 nav a {
-    color: #52637A;
+    color: var(--accent-sage-green);
     text-decoration: none;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: solid;
 }
 
 main {
@@ -63,10 +63,12 @@ main {
 }
 
 .content {
-  margin: 0;
-  padding: 0;
-  display: flex;
   justify-content: center;
+  max-width: 100%;
+  padding: 20px; /* Adjust padding as needed */
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: auto; /* Enable vertical and horizontal scrollbars if content overflows */
 }
 
 #newsletter {
@@ -121,6 +123,7 @@ footer {
   .container {
     width: 100%;
     overflow: hidden; /* Prevents horizontal overflow */
+    /* padding-left: 30px; */
   }
   
   h2 {
@@ -139,14 +142,14 @@ footer {
   .card {
     display: flex;
     flex-direction: column;
-    flex: 0 0 100%;
     padding: 20px;
-    background: var(--white);
+    background: var(--accent-dark-green);
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    box-shadow: 0 5px 15px var(--accent-muted-light-green);
     scroll-snap-align: start;
     transition: all 0.2s;
   }
+  
   
   .card:not(:last-child) {
     margin-right: 10px;
@@ -154,16 +157,21 @@ footer {
   
   .card:hover {
     color: var(--white);
-    background: var(--red);
+    background: var(--accent-sage-green);
   }
   
   .card .card-title {
     font-size: 20px;
+    color: var(--base-beige);
   }
   
   .card .card-content {
     margin: 20px 0;
     max-width: 85%;
+  }
+
+  .card-content p {
+    color: var(--accent-light-green);
   }
   
   .card .card-link-wrapper {
@@ -173,15 +181,15 @@ footer {
   .card .card-link {
     display: inline-block;
     text-decoration: none;
-    color: #52637A;
-    background: var(--red);
+    color: var(--accent-sage-green);
+    background: var(--accent-light-green);
     padding: 6px 12px;
     border-radius: 8px;
     transition: background 0.2s;
   }
   
   .card:hover .card-link {
-    background: var(--darkred);
+    background: var(--accent-muted-light-green);
   }
   
   .cards::-webkit-scrollbar {
@@ -234,10 +242,9 @@ footer {
 
 
 #index-body {
-  background-color: #E7E5E0;
+  background-color: var(--base-white);
   padding: 2%;
   margin-top: 2%;
-  border-radius: 3%;
 }
 
 /* recipe info page styles */
