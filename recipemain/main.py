@@ -54,7 +54,8 @@ def index():
 
 @bp.route("/new-recipe")
 def new_recipe():
-    return render_template("main/new_recipe.html")
+    ingredients = model.Ingredient.query.all()
+    return render_template("main/new_recipe.html", ingredients=ingredients)
 
 @bp.route("/new-recipe", methods=["POST"])
 def new_recipe_post():
