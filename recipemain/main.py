@@ -129,10 +129,8 @@ def recipe(recipe_id):
     recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
     if recipe:
         # Here, 'recipe' holds the recipe object fetched from the database
-        print(recipe.title)
-        for ingredient in recipe.q_ingredients:
-            print(ingredient.quantity, ingredient.units, ingredient.ingredient.name)
-        return render_template("main/recipe_info.html", recipe=recipe)
+        rating = model.Rating.query.filter_by(recipe_id=str(recipe_id)).first()
+        return render_template("main/recipe_info.html", recipe=recipe, rating=rating)
     else:
         abort(400, f"Recipe with id {recipe_id} not found")
 
@@ -201,8 +199,11 @@ def submit_rating_post(recipe_id):
     selected_star = request.form.get('star')
     print(f"The user selected {selected_star} stars!")
     recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
-    if recipe:
-        print(recipe.title)
 
-        # need to add the rating to the recipe as an object
-        return render_template("main/recipe_info.html", recipe=recipe)
+    rating = model.Rating(
+        value = selected_star,
+        user = flask_login.current_user,
+        recipe = recipe
+    )
+
+    return render_template("main/recipe_info.html", recipe=recipe, rating=rating)
