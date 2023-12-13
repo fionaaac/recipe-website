@@ -6,42 +6,6 @@ $(document).ready(function () {
         closeOnSelect: false,
         tags: true
     } );
-
-    // $('#recipe-form').submit(function (event) {
-    //     event.preventDefault();
-
-    //     var ingredientsData = [];
-
-    //     // Collect values from all rows
-    //     $('.ingredient-row').each(function () {
-    //         var ingredientName = $(this).find('#ingredient').val();
-    //         var amount = $(this).find('#amount').val();
-    //         var unit = $(this).find('#unit').val();
-
-    //         var ingredientData = {
-    //             ingredientName: ingredientName,
-    //             amount: amount,
-    //             unit: unit
-    //         };
-    //         ingredientsData.push(ingredientData);
-    //     });
-
-    //     console.log(ingredientsData);
-
-    //     // Create a hidden input to store the JSON data
-    //     var hiddenInput = $('<input>', {
-    //         type: 'hidden',
-    //         name: 'ingredientsData',
-    //         value: JSON.stringify(ingredientsData)
-    //     });
-
-    //     // Append the hidden input to the form
-    //     $(this).append(hiddenInput);
-
-    //     // Submit the form
-    //     this.submit();
-    // });
-
     
 });
 

@@ -39,30 +39,37 @@ def new_recipe_post():
     db.session.add(recipe)
 
     ingredients_data = request.form.get('ingredientsData')
+    q_ingredients = []
     if ingredients_data:
         ingredients_data = json.loads(ingredients_data)
-    print('Ingredients data:', ingredients_data)
+        for ingredient in ingredients_data:
+            name = ingredient['ingredientName']
+            amount = ingredient['amount']
+            unit = ingredient['unit']
 
-    for ingredient in ingredients_data:
-        name = ingredient['ingredientName']
-        amount = ingredient['amount']
-        unit = ingredient['unit']
+            ingredient = model.Ingredient.query.filter_by(name=name).first()
+            if not ingredient:
+                new_ingredient =   model.Ingredient(name=name)
+                db.session.add(new_ingredient)   
+                q_ingredient = model.Q_Ingredient(
+                    quantity=amount,
+                    units=unit,
+                    ingredient=new_ingredient,
+                    recipe=recipe
+            )       
+            else:
+                q_ingredient = model.Q_Ingredient(
+                    quantity=amount,
+                    units=unit,
+                    ingredient=ingredient,
+                    recipe=recipe
+                )
 
-        ingredient = model.Ingredient.query.filter_by(name=name).first()
-
-        if ingredient:
-            # Create Q_Ingredient and associate it with the Recipe
-            q_ingredient = model.Q_Ingredient(
-                quantity=amount,
-                units=unit,
-                ingredient=ingredient,
-                recipe=recipe
-            )
             db.session.add(q_ingredient)
-        else:
-            # Handle the case when the ingredient is not found
-            abort(400, f"Ingredient not found: {name}")
-
+            q_ingredients.append(q_ingredient)
+    
+    print('Ingredients data:', ingredients_data)
+    recipe.q_ingredients = q_ingredients
 
     uploaded_file = request.files['photo']
     if uploaded_file.filename != '':
@@ -81,6 +88,8 @@ def new_recipe_post():
         )
 
         db.session.add(photo)
+
+    print(recipe.q_ingredients)
     db.session.commit()
 
     path = (
@@ -113,12 +122,12 @@ def my_recipes():
 @bp.route('/recipe/<string:recipe_id>')
 @flask_login.login_required
 def recipe(recipe_id):
-    print('recipe_id', recipe_id)
-    for recipe in model.Recipe.query.all():
-        print(recipe.id)
     recipe = model.Recipe.query.filter_by(id=str(recipe_id)).first()
     if recipe:
         # Here, 'recipe' holds the recipe object fetched from the database
+        print(recipe.title)
+        for ingredient in recipe.q_ingredients:
+            print(ingredient.quantity, ingredient.units, ingredient.ingredient.name)
         return render_template("main/recipe_info.html", recipe=recipe)
     else:
         abort(400, f"Recipe with id {recipe_id} not found")
@@ -150,10 +159,7 @@ def user(username):
 @bp.route("/saved-recipes")
 @flask_login.login_required
 def saved_recipes():
-
     saved_recipes = model.Recipe.query.filter(model.Recipe.is_saved == True).all()
-    # for recipe in saved_recipes:
-    #     print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
     return render_template("main/saved_recipes.html", recipes=saved_recipes)
 
 @bp.route('/recipe/<string:recipe_id>', methods=["POST"])

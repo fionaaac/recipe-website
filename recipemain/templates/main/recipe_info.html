@@ -57,24 +57,14 @@
                               Item 1
                             </label>
                           </div>
-                          <div class="ingredient-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Item 2
-                            </label>
-                          </div>
-                          <div class="ingredient-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Item 3
-                            </label>
-                          </div>
-                          <div class="ingredient-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Item 4
-                            </label>
-                          </div>
+                        {% for ingredient in recipe.q_ingredients %}
+                            <div class="ingredient-item">
+                                <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}" id="flexCheck{{ loop.index }}">
+                                <label class="form-check-label" for="flexCheck{{ loop.index }}">
+                                    {{ ingredient.ingredient.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
 
