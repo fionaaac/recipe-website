@@ -1,0 +1,108 @@
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="recipe-container">
+            <div class="recipe-header">
+                <div class="left-half">
+                    <div class="left-half-content">
+                        <h1>{{ recipe.title }}</h1>
+                        <p>By {{recipe.user.name}}</p>
+                        <form action="{{ url_for('main.save_recipe_post', recipe_id=recipe.id) }}" method="POST" >
+                            <button class="save-button" type="submit" name="save"><span></span>Save Recipe</button> 
+                        </form>
+                        <!-- <input type="submit" name="save" value="Save Recipe" class="save-button"> -->
+                    </div>
+                </div>
+                <div class="right-half">
+                    <img class="info-page-img" src="{{ url_for('static', filename='../static/photos/photo-' ~ recipe.photos[0].id ~ '.jpg') }}" height="500">
+                </div>
+            </div>
+            
+
+            <div class="recipe-content">
+                <div class="recipe-content-header">
+                    <div class="recipe-content-heading">
+                        <h2 id="recipe-content-title">{{recipe.title}}</h2>
+                    </div>
+                    <div class="recipe-content-details">
+                        <div class="detail-items">
+                            <div class="detail-items detail-item">
+                                <span class="detail-item-label">Servings</span>
+                                <span class="detail-item-value">{{ recipe.persons }}</span>
+                                <span class="detail-item-units">serving(s)</span>
+                            </div>
+                            <div class="detail-items detail-item">
+                                <span class="detail-item-label">Time</span>
+                                <span class="detail-item-value">{{ recipe.time // 60 }}</span>
+                                <span class="detail-item-units">minute(s)</span>
+                            </div>
+                            <div class="detail-items detail-item">
+                                <span class="detail-item-label">Servings</span>
+                                <span class="detail-item-value">{{ recipe.persons }}</span>
+                                <span class="detail-item-units">serving(s)</span>
+                            </div>
+                        </div>
+                        <p class="recipe-content-summary">{{ recipe.description }}</p>
+                    </div>
+                </div>
+                
+                <div class="recipe-content-ingredients">
+                    <h2 class="ingredients-title">Ingredients</h2>
+
+                    <div class="ingredients-list">
+                        <div class="ingredient-item">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Item 1
+                            </label>
+                          </div>
+                        {% for ingredient in recipe.q_ingredients %}
+                            <div class="ingredient-item">
+                                <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}" id="flexCheck{{ loop.index }}">
+                                <label class="form-check-label" for="flexCheck{{ loop.index }}">
+                                    {{ ingredient.ingredient.name }} {{ ingredient.quantity }} {{ ingredient.units }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="recipe-content-instructions">
+                    <h2 class="instructions-title">Instructions</h2>
+                    <ul class="instructions-list">
+                        {% for step in recipe.steps %}
+                        <li class="instructions-item">
+                            <div class="instruction-text">
+                                <span>{{ step.text }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                        <li class="instructions-item">
+                            <div class="instruction-text">
+                                <span>In a pot, add olive oil and once hot, sauté carrots and onions for 2-3 minutes. Add onion and salt and sauté another 2 minutes or so.</span>
+                            </div>
+                        </li>
+                        <li class="instructions-item">
+                            <div class="instruction-text">
+                                <span>Add garlic, thyme, smoked paprika, beans and red chili flakes. Sauté for 2 minutes then add vegetable broth and bring the mixture to a boil and then lower to a simmer for 15 minutes, covered.</span>
+                            </div>
+                        </li>
+                        <li class="instructions-item">
+                            <div class="instruction-text">
+                                <span>Transfer the mixture to a blender or use an immersion blender and blend until smooth. If you prefer a thicker soup, add more vegetable broth and blend until desired consistency is achieved. Season with salt, as needed, and black pepper.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="recipe-comments">
+                <h2 class="comments-title">Leave a Comment</h2>
+                <!-- insert form here -->
+            </div>
+
+    </div>
+    {% endblock %}
+</body>

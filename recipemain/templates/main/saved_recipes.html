@@ -1,0 +1,15 @@
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="home-container">
+        <div class="saved-grid-container">
+            <ul class="saved-cards">
+                {% for recipe in recipes %}
+                    {% include 'recipe_grid_template.html' %}
+                {% endfor %}
+            </ul>
+        </div>   
+    </div>
+    {% endblock %}
+</body>
