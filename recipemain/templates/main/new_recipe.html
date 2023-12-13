@@ -52,18 +52,7 @@
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <label class="input-group-text">Ingredient</label>
-                                        <select class="form-select" id="ingredient">
-                                            <option selected></option>
-                                            <option>Flour</option>
-                                            <option>Water</option>
-                                            <option>Sugar</option>
-                                            <option>Salt</option>
-                                            <option>Pepper</option>
-                                            <option>Beef</option>
-                                            {% for ingredient in ingredients %}
-                                                <option>{{ ingredient.name }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        <input type="text" class="form-control" id="ingredient">
                                     </div>
                                 </div>
     
@@ -77,12 +66,13 @@
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <label class="input-group-text">Unit</label>
-                                        <select class="form-select" id="unit">
+                                        <input type="text" class="form-control" id="unit">
+                                        <!-- <select class="form-select" id="unit">
                                             <option selected></option>
                                             <option>Teaspoon</option>
                                             <option>Tablespoon</option>
                                             <option>Fluid Ounce</option>
-                                        </select>
+                                        </select> -->
                                     </div>
                                 </div>
                             </div>
