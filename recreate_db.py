@@ -1,9 +1,9 @@
-from recipemain import db
+from recipemain import db, model
 
 def clear_tables():
     # Clear data from each table
-    db.session.query(Recipe).delete()
-    db.session.query(User).delete()
+    db.session.query(model.Recipe).delete()
+    db.session.query(model.User).delete()
     # Add more delete statements for other models
 
     # Commit the changes

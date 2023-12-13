@@ -18,17 +18,18 @@ class Ingredient(db.Model):
     name = db.Column(db.String(64), nullable=False)
 
     q_ingredients = db.relationship('Q_Ingredient', back_populates='ingredient')
-    recipes = db.relationship('Recipe', back_populates='ingredient')
+    # recipes = db.relationship('Recipe', back_populates='ingredient')
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
+    recipe = db.relationship('Recipe', back_populates='ingredients')
 
 class Q_Ingredient(db.Model):
     id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
     quantity = db.Column(db.Integer)
     units = db.Column(db.Integer)
-
-    # ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
+    
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     ingredient = db.relationship('Ingredient', back_populates='q_ingredients')
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='q_ingredients')
 
 class Step(db.Model):
@@ -51,10 +52,8 @@ class Recipe(db.Model):
     # user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     user = db.relationship('User', back_populates='recipes')
-    # ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
-    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
-    ingredient = db.relationship('Ingredient', back_populates='recipes')
 
+    ingredients = db.relationship('Ingredient', back_populates='recipe')
     q_ingredients = db.relationship('Q_Ingredient', back_populates='recipe')
     steps = db.relationship('Step', back_populates='recipe')
     ratings = db.relationship('Rating', back_populates='recipe')
