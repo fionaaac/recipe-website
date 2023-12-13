@@ -506,6 +506,14 @@ footer {
 } */
 
 /* New Recipe Page Styles */
+#login-form {
+  margin-top: -10%;
+}
+
+#signup-form {
+  margin-top: -10%;
+}
+
 .form-holder {
   display: flex;
   flex-direction: column;
