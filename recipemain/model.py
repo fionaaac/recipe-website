@@ -21,7 +21,7 @@ class Ingredient(db.Model):
 
     q_ingredients = db.relationship('Q_Ingredient', back_populates='ingredient')
     # recipes = db.relationship('Recipe', back_populates='ingredient')
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
     # db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='ingredients')
 
@@ -34,7 +34,7 @@ class Q_Ingredient(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
     # db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     ingredient = db.relationship('Ingredient', back_populates='q_ingredients')
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
     # db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='q_ingredients')
 
@@ -43,7 +43,7 @@ class Step(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.String(512), nullable=False)
     # position = db.Column(db.Enum)
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
     # db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='steps')
     
@@ -72,11 +72,11 @@ class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     value = db.Column(db.Integer, nullable=False)
     # user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     user = db.relationship('User', back_populates='ratings')
     # recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
     # db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='ratings')
 
@@ -84,10 +84,10 @@ class Photo(db.Model):
     # id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
     # db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='photos')
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     user = db.relationship('User', back_populates='photos')
 
