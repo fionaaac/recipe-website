@@ -26,8 +26,7 @@ class Q_Ingredient(db.Model):
     id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
     quantity = db.Column(db.Integer)
     units = db.Column(db.Integer)
-
-    # ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
+    
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     ingredient = db.relationship('Ingredient', back_populates='q_ingredients')
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)

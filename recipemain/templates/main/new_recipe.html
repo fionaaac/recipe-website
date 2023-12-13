@@ -16,7 +16,7 @@
 </head>
 <body>
     
-    <form action="{{ url_for('main.new_recipe_post') }}" method="post" enctype="multipart/form-data">
+    <form id="recipe-form" action="{{ url_for('main.new_recipe_post') }}" method="post" enctype="multipart/form-data">
         <div class="form-holder">
             <div class="form-content">
                 <div class="form-items">
@@ -44,11 +44,11 @@
                         <input type="file" class="form-control" name="photo" id="photo" accept="image/jpeg,image/png" required>
                     </div>
 
-                    <select class="form-select" id="multiple-select-custom-field" name="ingredients" data-placeholder="Enter Ingredients:" multiple>
+                    <!-- <select class="form-select" id="multiple-select-custom-field" name="ingredients" data-placeholder="Enter Ingredients:" multiple>
                         {% for ingredient in ingredients %}
                             <option>{{ ingredient.name }}</option>
                         {% endfor %}
-                    </select>
+                    </select> -->
                     
                     <h5>Ingredients:</h5>
 
@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <label class="input-group-text">Ingredient</label>
-                                        <select class="form-select">
+                                        <select class="form-select" id="ingredient">
                                             <option selected></option>
                                             {% for ingredient in ingredients %}
                                                 <option>{{ ingredient.name }}</option>
@@ -70,14 +70,14 @@
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <label class="input-group-text">Amount</label>
-                                        <input type="number" class="form-control">
+                                        <input type="number" class="form-control" id="amount">
                                     </div>
                                 </div>
     
                                 <div class="col-md-4">
                                     <div class="input-group">
                                         <label class="input-group-text">Unit</label>
-                                        <select class="form-select">
+                                        <select class="form-select" id="unit">
                                             <option selected></option>
                                             <option>Teaspoon</option>
                                             <option>Tablespoon</option>

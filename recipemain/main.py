@@ -1,7 +1,8 @@
 import datetime
+import json
 import dateutil.tz
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask import Blueprint, abort, render_template, request, redirect, url_for, flash, current_app
 from flask_login import current_user
 from . import db, model
 import flask_login
@@ -64,8 +65,6 @@ def new_recipe_post():
     description = request.form.get("description")
     persons = request.form.get("persons")
     time = request.form.get("time")
-    ingredient_names = request.form.getlist("ingredients")
-    print(ingredient_names)
 
     recipe = model.Recipe(
         user = flask_login.current_user,
@@ -74,9 +73,33 @@ def new_recipe_post():
         persons = persons,
         time = time, 
     )
+    db.session.add(recipe)
 
-    ingredients = model.Ingredient.query.filter(model.Ingredient.name.in_(ingredient_names)).all()
-    recipe.ingredients = ingredients
+    ingredients_data = request.form.get('ingredientsData')
+    if ingredients_data:
+        ingredients_data = json.loads(ingredients_data)
+    print('Ingredients data:', ingredients_data)
+
+    for ingredient in ingredients_data:
+        name = ingredient['ingredientName']
+        amount = ingredient['amount']
+        unit = ingredient['unit']
+
+        ingredient = model.Ingredient.query.filter_by(name=name).first()
+
+        if ingredient:
+            # Create Q_Ingredient and associate it with the Recipe
+            q_ingredient = model.Q_Ingredient(
+                quantity=amount,
+                units=unit,
+                ingredient=ingredient,
+                recipe=recipe
+            )
+            db.session.add(q_ingredient)
+        else:
+            # Handle the case when the ingredient is not found
+            abort(400, f"Ingredient not found: {name}")
+
 
     uploaded_file = request.files['photo']
     if uploaded_file.filename != '':
@@ -95,7 +118,6 @@ def new_recipe_post():
         )
 
         db.session.add(photo)
-    db.session.add(recipe)
     db.session.commit()
 
     path = (
