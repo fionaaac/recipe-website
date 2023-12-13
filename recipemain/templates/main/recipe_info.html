@@ -61,7 +61,7 @@
                             <div class="ingredient-item">
                                 <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}" id="flexCheck{{ loop.index }}">
                                 <label class="form-check-label" for="flexCheck{{ loop.index }}">
-                                    {{ ingredient.ingredient.name }}
+                                    {{ ingredient.ingredient.name }} {{ ingredient.quantity }} {{ ingredient.units }}
                                 </label>
                             </div>
                         {% endfor %}
@@ -71,6 +71,14 @@
                 <div class="recipe-content-instructions">
                     <h2 class="instructions-title">Instructions</h2>
                     <ul class="instructions-list">
+                        {% for step in recipe.steps %}
+                        <li class="instructions-item">
+                            <div class="instruction-text">
+                                <span>{{ step.text }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+
                         <li class="instructions-item">
                             <div class="instruction-text">
                                 <span>In a pot, add olive oil and once hot, sauté carrots and onions for 2-3 minutes. Add onion and salt and sauté another 2 minutes or so.</span>

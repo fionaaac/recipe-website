@@ -43,8 +43,7 @@ function addIngredientRow() {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('recipe-form').addEventListener('submit', function (event) {
-        // event.preventDefault();
-
+        // Ingredient Data
         var allRows = document.querySelectorAll('.ingredient-row');
         var ingredientsData = [];
 
@@ -61,14 +60,52 @@ document.addEventListener('DOMContentLoaded', function () {
             ingredientsData.push(ingredientData);
         });
 
+        // Steps Data
+        var allSteps = document.querySelectorAll('.step-textarea');
+        var stepsData = [];
 
-        var hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'ingredientsData';
-        hiddenInput.value = JSON.stringify(ingredientsData);
-        console.log(hiddenInput.value);
-        this.appendChild(hiddenInput);
+        allSteps.forEach(function (textarea) {
+            var stepText = textarea.value.trim();
+            if (stepText !== '') {
+                stepsData.push(stepText);
+            }
+        });
 
+        var hiddenIngredientsInput = document.createElement('input');
+        hiddenIngredientsInput.type = 'hidden';
+        hiddenIngredientsInput.name = 'ingredientsData';
+        hiddenIngredientsInput.value = JSON.stringify(ingredientsData);
+        this.appendChild(hiddenIngredientsInput);
+
+        // Create hidden input for steps data
+        var hiddenStepsInput = document.createElement('input');
+        hiddenStepsInput.type = 'hidden';
+        hiddenStepsInput.name = 'stepsData';
+        hiddenStepsInput.value = JSON.stringify(stepsData);
+        this.appendChild(hiddenStepsInput);
+
+        // Submit the form
+        console.log("submitted!");
         this.submit();
     });
 });
+
+function addStepRow() {
+    // Create a new textarea element
+    var newTextarea = document.createElement('textarea');
+    newTextarea.className = 'form-control step-textarea';
+    newTextarea.rows = '2';
+
+    // Append the new textarea to the steps container
+    var stepsContainer = document.getElementById('steps-container');
+    stepsContainer.appendChild(newTextarea);
+
+    var allRows = document.querySelectorAll('.step-textarea');
+    var stepsData = [];
+
+    allRows.forEach(function (textarea) {
+        stepsData.push(textarea.value.trim());
+    });
+    console.log('Steps Data:', stepsData);
+    
+}
