@@ -29,7 +29,7 @@ class Q_Ingredient(db.Model):
     # id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     quantity = db.Column(db.Integer)
-    units = db.Column(db.Integer)
+    units = db.Column(db.String(64))
     
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"))
     # db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
