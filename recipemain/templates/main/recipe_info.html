@@ -51,12 +51,6 @@
                     <h2 class="ingredients-title">Ingredients</h2>
 
                     <div class="ingredients-list">
-                        <div class="ingredient-item">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Item 1
-                            </label>
-                          </div>
                         {% for ingredient in recipe.q_ingredients %}
                             <div class="ingredient-item">
                                 <input class="form-check-input" type="checkbox" value="{{ ingredient.id }}" id="flexCheck{{ loop.index }}">
@@ -78,22 +72,6 @@
                             </div>
                         </li>
                         {% endfor %}
-
-                        <li class="instructions-item">
-                            <div class="instruction-text">
-                                <span>In a pot, add olive oil and once hot, sauté carrots and onions for 2-3 minutes. Add onion and salt and sauté another 2 minutes or so.</span>
-                            </div>
-                        </li>
-                        <li class="instructions-item">
-                            <div class="instruction-text">
-                                <span>Add garlic, thyme, smoked paprika, beans and red chili flakes. Sauté for 2 minutes then add vegetable broth and bring the mixture to a boil and then lower to a simmer for 15 minutes, covered.</span>
-                            </div>
-                        </li>
-                        <li class="instructions-item">
-                            <div class="instruction-text">
-                                <span>Transfer the mixture to a blender or use an immersion blender and blend until smooth. If you prefer a thicker soup, add more vegetable broth and blend until desired consistency is achieved. Season with salt, as needed, and black pepper.</span>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
