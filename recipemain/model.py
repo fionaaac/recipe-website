@@ -35,9 +35,7 @@ class Q_Ingredient(db.Model):
 class Step(db.Model):
     id = db.Column(db.Integer, default=lambda: uuid.uuid4().int >> (128 - 32), primary_key=True)
     text = db.Column(db.String(512), nullable=False)
-    position = db.Column(db.Enum)
-
-    # recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)
+    # position = db.Column(db.Enum)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     recipe = db.relationship('Recipe', back_populates='steps')
     
