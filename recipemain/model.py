@@ -31,7 +31,7 @@ class Q_Ingredient(db.Model):
     quantity = db.Column(db.Integer)
     units = db.Column(db.Integer)
     
-    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"), nullable=False)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredient.id"))
     # db.Column(db.Integer, db.ForeignKey("ingredient.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     ingredient = db.relationship('Ingredient', back_populates='q_ingredients')
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
@@ -57,7 +57,7 @@ class Recipe(db.Model):
     is_saved = db.Column(db.Boolean, default=False)
 
     # user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # db.Column(db.Integer, db.ForeignKey("user.id"), default=lambda: uuid.uuid4().int >> (128 - 32), nullable=False)
     user = db.relationship('User', back_populates='recipes')
 
