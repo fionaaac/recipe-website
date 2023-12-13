@@ -1,0 +1,24 @@
+:root {
+    --red: #ef233c;
+    --darkred: #c00424;
+    --platinum: #e5e5e5;
+    --black: #2b2d42;
+    --white: #52637A;
+    --thumb: #edf2f4;
+    --base-beige: #ebeae3;
+    --base-white: #f8f7f4;
+    --base-dark: #232628;
+    --accent-dark-green: #38524f;
+    --accent-light-green: #d8e1cc;
+    --accent-sage-green: #38514f;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background-color: var(--base-white);
+}
