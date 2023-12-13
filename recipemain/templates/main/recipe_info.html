@@ -11,7 +11,41 @@
                         <form action="{{ url_for('main.save_recipe_post', recipe_id=recipe.id) }}" method="POST" >
                             <button class="save-button" type="submit" name="save"><span></span>Save Recipe</button> 
                         </form>
-                        <!-- <input type="submit" name="save" value="Save Recipe" class="save-button"> -->
+                        <div class="rating-container">
+                            <form id="ratingForm" action="{{ url_for('main.submit_rating_post', recipe_id=recipe.id) }}" method="POST">
+                                <div class="rating">
+                                    <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                                    <label for="star5" >☆</label>
+                                    <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                                    <label for="star4" >☆</label>
+                                    <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                                    <label for="star3" >☆</label>
+                                    <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                                    <label for="star2" >☆</label>
+                                    <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                                    <label for="star1" >☆</label>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                            
+                            <script>
+                                const stars = document.querySelectorAll('.rating input[type="radio"]');
+                                const ratingForm = document.getElementById('ratingForm');
+                                const submittedRating = rating; // Accessing the 'rating' variable passed from Flask
+                                stars.forEach(star => {
+                                    star.addEventListener('click', function() {
+                                        // Submit the form when a star is clicked
+                                        ratingForm.submit();
+                                    });
+                                });
+                                for (let i = 1; i <= 5; i++) {
+                                    const star = document.getElementById(`star${i}`);
+                                    if (i <= submittedRating) {
+                                        star.checked = true;
+                                    }
+                                }
+                            </script>
+                          </div>
                     </div>
                 </div>
                 <div class="right-half">

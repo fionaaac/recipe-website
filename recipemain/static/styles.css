@@ -13,6 +13,15 @@
   --accent-dark-green: #38524f;
   --accent-light-green: #d8e1cc;
   --accent-sage-green: #38514f;
+  --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+  --fill: gold;
+  --fillbg: rgba(100, 100, 100, 0.15);
+  --dir: right;
+  --stars: 5;
+  --starsize: 3rem;
+  --symbol: var(--star);
+  --value: 1;
+  --x: calc(100% * (var(--value) / var(--stars)));
 }
 
 body {
@@ -702,79 +711,49 @@ footer {
     font-size: 12px;
 }
 
-
-/* Star Rating */
-
-.rating-container{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+.rating-container {
+  text-align: center;
+}
+.hide {
+  display: none;
 }
 
-.rating-wrap{
-	max-width: 480px;
-	margin: auto;
-	padding: 15px;
-	/* box-shadow: 0 0 3px 0 rgba(0,0,0,.2); */
-	text-align: center;
+.clear {
+  float: none;
+  clear: both;
 }
 
-.center{
-	width: 162px; 
-	margin: auto;
+.rating {
+    width: 90px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
 }
 
-#rating-value{	
-	width: 110px;
-	margin: 40px auto 0;
-	padding: 10px 5px;
-	text-align: center;
-	box-shadow: inset 0 0 2px 1px rgba(46,204,113,.2);
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 1.1em;
+    cursor: pointer;
+    color: #000;
 }
 
-/*styling star rating*/
-.rating{
-	border: none;
-	float: left;
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
 }
 
-.rating > input{
-	display: none;
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > input.radio-btn:checked ~ label:before,
+.rating > input.radio-btn:checked ~ label:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
 }
-
-.rating > label:before{
-	content: '\f005';
-	font-family: FontAwesome;
-	margin: 5px;
-	font-size: 1.5rem;
-	display: inline-block;
-	cursor: pointer;
-}
-
-.rating > .half:before{
-	content: '\f089';
-	position: absolute;
-	cursor: pointer;
-}
-
-
-.rating > label{
-	color: #ddd;
-	float: right;
-	cursor: pointer;
-}
-
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover, 
-.rating:not(:checked) > label:hover ~ label{
-	color: var(--black);
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label{
-	color: var(--black);
-}
-
