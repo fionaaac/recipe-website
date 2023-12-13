@@ -71,6 +71,17 @@ def new_recipe_post():
     print('Ingredients data:', ingredients_data)
     recipe.q_ingredients = q_ingredients
 
+    steps_data = request.form.get('stepsData')
+    steps = []
+    if steps_data:
+        steps_data = json.loads(steps_data)
+        for step_text in steps_data:
+            step = model.Step(text=step_text)
+            db.session.add(step)
+            steps.append(step)
+    print("steps", steps_data)
+    recipe.steps = steps
+
     uploaded_file = request.files['photo']
     if uploaded_file.filename != '':
         content_type = uploaded_file.content_type
@@ -89,7 +100,6 @@ def new_recipe_post():
 
         db.session.add(photo)
 
-    print(recipe.q_ingredients)
     db.session.commit()
 
     path = (
@@ -99,12 +109,6 @@ def new_recipe_post():
         / f"photo-{photo.id}.{file_extension}"
     )
     uploaded_file.save(path)
-
-    all_recipes = model.Recipe.query.all()
-
-    # Prints all recipes in the database
-    for recipe in all_recipes:
-        print(f"Recipe ID: {recipe.id}, Title: {recipe.title}, Description: {recipe.description}")
     return redirect(url_for("main.my_recipes"))
 
 
