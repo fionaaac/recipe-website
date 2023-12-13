@@ -15,7 +15,18 @@ bp = Blueprint("main", __name__)
 @bp.route("/")
 @flask_login.login_required
 def index():
-    return render_template("main/index.html", recipes=model.Recipe.query.all(), photos=model.Photo.query.all())
+    alphabetical_recipes = (model.Recipe.query.order_by(model.Recipe.title).all())
+    popular_recipes = (
+            model.Recipe.query
+            .join(model.Rating) 
+            .filter(model.Rating.value > 4)  
+            .group_by(model.Recipe.id) 
+            .order_by(db.func.count(model.Rating.id).desc())  
+            .limit(5)  
+            .all()
+        )
+    return render_template("main/index.html", recipes=model.Recipe.query.all(), photos=model.Photo.query.all(),
+                           alphabetical_recipes=alphabetical_recipes, popular_recipes=popular_recipes)
 
 @bp.route("/new-recipe")
 def new_recipe():
@@ -195,3 +206,10 @@ def saved_recipe_delete(recipe_id):
     
     saved_recipes = model.Recipe.query.filter(model.Recipe.is_saved == True).all()
     return render_template("main/saved_recipes.html", recipes=saved_recipes)
+
+@flask_login.login_required
+@bp.route('/add-rating/<string:recipe_id>', methods=["POST"])
+def submit_rating_post(recipe_id):
+    data = request.get_json()
+    rating = data.get('rating')
+    print("rating", rating)
